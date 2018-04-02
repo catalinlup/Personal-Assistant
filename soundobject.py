@@ -6,13 +6,15 @@ class soundObject:
 	filename=""
 	time=""
 	day=""
-	def __init__(self,name,filename,time,day):
+	message=""
+	def __init__(self,name,filename,time,day,message):
 		self.name=name
 		self.filename=filename
 		self.time=time
 		self.day=day
+		self.message=message
 	def PrintSoundObject(self):
-		print(self.name+" "+self.filename+" "+self.time+" "+self.day)
+		print(self.name+" "+self.filename+" "+self.time+" "+self.day+" "+self.message)
 	def IntValueOfTime(self):
 		d = self.day
 		h,m=self.time.split(':')

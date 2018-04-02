@@ -11,7 +11,7 @@ class Program:
 		self.tree = ET.parse(filepath)
 		self.root = self.tree.getroot()
 		for sb in self.root.findall(soundObjectName):
-			obj=soundObject(sb.get('name'),sb.find('filename').text,sb.find('time').text,sb.find('day').text)
+			obj=soundObject(sb.get('name'),sb.find('filename').text,sb.find('time').text,sb.find('day').text,sb.find('message').text)
 			self.sounds[obj.name]=obj
 	def printSounds(self):
 		for key in self.sounds:

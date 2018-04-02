@@ -3,6 +3,7 @@ from ProgramGeter import*
 from queue import*
 from osCommands import*
 import datetime
+from twitterAPI import*
 audioFilePath="res/audio/"
 mnPlayer=Player()
 rfile=open(DATA_COM_NAME,"r")
@@ -36,6 +37,7 @@ def PlayEvent(event):
 	if type(event)==soundObject:
 		ClearScreen()
 		print("Currently playing "+event.name+ " ~~~filepath: "+ event.filename)
+		SendOnTwitter("Currently playing "+event.name+ " ~~~filepath: "+event.filename+"\nMessage:\n"+event.message)
 		mnPlayer.PlayMusicByFilepath(audioFilePath+event.filename)
 def AddEvent(event):
 	if type(event)==soundObject:

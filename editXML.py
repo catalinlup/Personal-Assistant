@@ -3,7 +3,7 @@ try:
 except:
     print("Errror Install XML Parser")
 from codes import*
-def AddSoundObject(filepath,name,filename,day,time):
+def AddSoundObject(filepath,name,filename,day,time,message):
     filepath=PATH_TO_PROGRAMS+"/"+filepath
     file=ET.parse(filepath)
     root=file.getroot()
@@ -15,9 +15,12 @@ def AddSoundObject(filepath,name,filename,day,time):
     dayObj.text=day
     timeObj=ET.Element("time")
     timeObj.text=time
+    messageObj=ET.Element("message")
+    messageObj.text=message
     soundObj.append(fileNameobj)
     soundObj.append(dayObj)
     soundObj.append(timeObj)
+    soundObj.append(messageObj)
     root.append(soundObj)
     file.write(filepath)
 def DeleteSoundObject(filepath,name):
@@ -39,6 +42,6 @@ def GetAllSoundObjects(filepath):
     file=ET.parse(filepath)
     root=file.getroot()
     for sObj in root:
-        strToAdd=sObj.get('name')+' '+sObj.find('filename').text+' '+sObj.find('time').text+' '+sObj.find('day').text
+        strToAdd=sObj.get('name')+' '+sObj.find('filename').text+' '+sObj.find('time').text+' '+sObj.find('day').text+' '+sObj.find('message').text
         ret.append(strToAdd)
     return ret
