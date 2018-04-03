@@ -4,6 +4,7 @@ from queue import*
 from osCommands import*
 import datetime
 from twitterAPI import*
+from printInColors import*
 audioFilePath="res/audio/"
 mnPlayer=Player()
 rfile=open(DATA_COM_NAME,"r")
@@ -26,6 +27,17 @@ def getCurrentTimeInStr():
 	tm+=":"
 	tm+=str(now.minute)
 	return tm
+def PrintCurrentTime():
+	tm=getBgMagenta("("+PROGRAM_TO_RUN_HEADLESS+")")
+	now=datetime.datetime.now()
+	day=(datetime.datetime.today().weekday()+1)
+	tm+=' '+getBgRed("Day:")+' '
+	tm+=getBlue(str(day))
+	tm+=' '+getBgRed("Time:")+' '
+	tm+=getGreen(str(now.hour))
+	tm+=getYellow(":")
+	tm+=getGreen(str(now.minute))
+	print(tm)
 def Provizoriu():
 	tm=getHourMinutes()
 	#print(tm)
@@ -36,7 +48,7 @@ def Provizoriu():
 def PlayEvent(event):
 	if type(event)==soundObject:
 		ClearScreen()
-		print("Currently playing "+event.name+ " ~~~filepath: "+ event.filename)
+		print(getBgYellow("Currently playing")+' '+getGreen(event.name)+' '+getBgYellow("~~~filepath:")+' '+ getMagenta(event.filename))
 		SendOnTwitter("Currently playing "+event.name+ " ~~~filepath: "+event.filename+"\nMessage:\n"+event.message)
 		mnPlayer.PlayMusicByFilepath(audioFilePath+event.filename)
 def AddEvent(event):
@@ -61,7 +73,8 @@ def main():
 	Init()
 	while True:
 		ClearScreen()
-		print(getCurrentTimeInStr())
+		#print(getCurrentTimeInStr())
+		PrintCurrentTime()
 		CheckForEvents()
 		continue
 

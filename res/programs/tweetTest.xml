@@ -1,5 +1,7 @@
 <data><soundObject name="Tweet123"><filename>queen.mp3</filename><day>Monday</day><time>13:6</time><message>Hello World!</message></soundObject><soundObject name="Tweet3"><filename>queen.mp3</filename><day>Monday</day><time>13:25</time><message>Hello World!
 This is my new Personal Assistant Program!
 It will help people organise!
-</message></soundObject><soundObject name="Tweet1234"><filename>queen.mp3</filename><day>Monday</day><time>13:33</time><message>The Second Tweet!
+</message></soundObject><soundObject name="TweetNou"><filename>queen.mp3</filename><day>Monday</day><time>5:10</time><message>Buna! Acesta este noul Tweet!
+
+</message></soundObject><soundObject name="Queen"><filename>queen.mp3</filename><day>Tuesday</day><time>15:42</time><message>Tweet!
 </message></soundObject></data>
