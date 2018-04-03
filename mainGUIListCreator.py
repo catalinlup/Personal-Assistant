@@ -7,6 +7,7 @@ except:
     print("Error Please Install Tkinter!!")
 from osCommands import*
 from editXML import*
+from youtubedownloader import*
 #s=ttk.Style()
 #s.theme_use('clam')
 
@@ -25,6 +26,14 @@ AddFrame.config(bg=GUI_BACKGROUND_COLOR)
 DeleteFrame=Frame(root)
 DeleteFrame.config(bg=GUI_BACKGROUND_COLOR)
 ListFrame=Frame(root)
+DownloadFrame=Frame(root)
+DownloadFrame.config(bg=GUI_BACKGROUND_COLOR)
+urlToDownload=Entry(DownloadFrame)
+urlToDownloadLabel=Label(DownloadFrame,bg=GUI_BACKGROUND_COLOR)
+urlToDownloadVar=StringVar()
+nameToDownload=Entry(DownloadFrame)
+nameToDownloadLabel=Label(DownloadFrame,bg=GUI_BACKGROUND_COLOR)
+nameToDownloadVar=StringVar()
 nameToDelete=Entry(DeleteFrame)
 nameToDeleteVar=StringVar()
 nameToDeleteLabel=Label(DeleteFrame,bg=GUI_BACKGROUND_COLOR)
@@ -45,6 +54,7 @@ messageToAddLabel=Label(AddFrame,image=twitterIcon,bg=GUI_BACKGROUND_COLOR)
 messageToAddVar=StringVar()
 AddButton=Button(AddFrame,text="Add")
 DeleteButton=Button(DeleteFrame,text="Delete")
+DownloadButton=Button(DownloadFrame,text="Download")
 #ListBox
 elementsInProgram=Listbox(ListFrame)
 #end
@@ -106,7 +116,16 @@ def DeleteButtonAction(event=None):
         nameToDelete.delete(0,"end")
     else:
         messagebox.showwarning("Warining","Could not find "+nameDelStr+" in "+filepathStr)
-
+def DownloadButtonAction(event=None):
+    urlStr=urlToDownloadVar.get()
+    nameStr=nameToDownloadVar.get()
+    if len(urlStr)==0 or len(nameStr)==0:
+        messagebox.showwarning("Warining!","Fill all gaps!")
+        return
+    DownloadYouTubeAudio(urlStr,nameStr)
+    messagebox.showinfo("Info!","Audio downloaded Successfully!")
+    urlToDownload.delete(0,"end")
+    nameToDownload.delete(0,"end")
 
 def InitAddMenu():
     nameToAddLabel.grid(row=0,column=0)
@@ -145,6 +164,18 @@ def InitDelMenu():
     DeleteButton.config(command=DeleteButtonAction)
     DeleteFrame.pack(side=TOP)
 
+def InitDownloadMenu():
+    urlToDownloadLabel.grid(row=0,column=0)
+    nameToDownloadLabel.grid(row=0,column=1)
+    urlToDownloadLabel.config(text="URL",font=GUI_FONT)
+    nameToDownloadLabel.config(text="Name",font=GUI_FONT)
+    urlToDownload.config(textvariable=urlToDownloadVar)
+    nameToDownload.config(textvariable=nameToDownloadVar)
+    urlToDownload.grid(row=1,column=0)
+    nameToDownload.grid(row=1,column=1)
+    DownloadButton.grid(row=1,column=2)
+    DownloadButton.config(command=DownloadButtonAction)
+    DownloadFrame.pack(side=TOP)
 
 
 def ButtonRun(event=None):
@@ -192,6 +223,7 @@ def init():
     SetSelectedProgram()
     InitAddMenu()
     InitDelMenu()
+    InitDownloadMenu()
     root.config(menu=theMenu)
     RunButton.config(width=20,height=3,fg="blue",font="comic 14 bold")
     #RunButton.bind("<Button-1>",ButtonRun)
